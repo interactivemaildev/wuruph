@@ -1,0 +1,80 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "studio": "prisma studio",
+    "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "postbuild": "next-sitemap"
+  },
+  "prisma": {
+    "schema": "db/schema.prisma"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 100
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.10.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.6",
+    "@mui/icons-material": "^5.11.9",
+    "@mui/lab": "^5.0.0-alpha.120",
+    "@mui/material": "^5.11.10",
+    "@mui/styles": "^5.11.9",
+    "@prisma/client": "^4.16.2",
+    "@tanem/react-nprogress": "^5.0.30",
+    "axios": "^1.6.8",
+    "cookies-next": "^2.1.1",
+    "formik": "^2.2.9",
+    "hex-to-rgba": "^2.0.1",
+    "http-status-codes": "^2.2.0",
+    "lodash": "^4.17.21",
+    "mobile-detect": "1.4.5",
+    "next": "13.2.1",
+    "next-reveal": "1.0.6",
+    "next-seo": "^5.15.0",
+    "nodemailer": "^6.9.13",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-share": "^4.4.1",
+    "react-slick": "^0.29.0",
+    "react-svg": "^16.1.4",
+    "react-waypoint": "^10.3.0",
+    "react-youtube": "^10.1.0",
+    "reaptcha": "^1.12.1",
+    "request-ip": "^3.3.0",
+    "sharp": "^0.31.3",
+    "string-strip-html": "^13.2.0"
+  },
+  "devDependencies": {
+    "@svgr/webpack": "^6.5.1",
+    "@types/lodash": "^4.14.191",
+    "@types/nodemailer": "^6.4.14",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
+    "@types/react-slick": "^0.23.10",
+    "@vitejs/plugin-react": "^4.2.1",
+    "babel-plugin-styled-components": "^2.0.7",
+    "babel-plugin-transform-remove-console": "^6.9.4",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "13.2.1",
+    "next-sitemap": "^3.1.54",
+    "prisma": "^4.16.2",
+    "typescript": "^5.4.5",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^1.4.0"
+  },
+  "private": true
+}

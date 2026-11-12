@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Sliders {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  title      String?
+  img        String
+  number     String   @db.VarChar(10)
+  visibility Boolean
+}
+
+model Categories {
+  id         Int                    @id @default(autoincrement())
+  createdAt  DateTime               @default(now())
+  updatedAt  DateTime               @updatedAt
+  title      String
+  slug       String
+  img        String?
+  number     String                 @db.VarChar(10)
+  visibility Boolean
+  products   CategoriesOnProducts[]
+}
+
+model CategoriesOnProducts {
+  product    Products   @relation(fields: [productId], references: [id])
+  productId  Int // relation scalar field (used in the `@relation` attribute above)
+  category   Categories @relation(fields: [categoryId], references: [id])
+  categoryId Int // relation scalar field (used in the `@relation` attribute above)
+
+  @@id([productId, categoryId])
+}
+
+model Marketplaces {
+  id         Int                      @id @default(autoincrement())
+  createdAt  DateTime                 @default(now())
+  updatedAt  DateTime                 @updatedAt
+  title      String
+  slug       String
+  defaultUrl String
+  visibility Boolean
+  products   MarketplacesOnProducts[]
+}
+
+model MarketplacesOnProducts {
+  product       Products     @relation(fields: [productId], references: [id])
+  productId     Int // relation scalar field (used in the `@relation` attribute above)
+  marketplace   Marketplaces @relation(fields: [marketplaceId], references: [id])
+  marketplaceId Int // relation scalar field (used in the `@relation` attribute above)
+  url           String?      @db.Text
+
+  @@id([productId, marketplaceId])
+}
+
+model Products {
+  id             Int                      @id @default(autoincrement())
+  createdAt      DateTime                 @default(now())
+  updatedAt      DateTime                 @updatedAt
+  title          String
+  slug           String
+  gender         String?
+  img            String
+  materials      String?
+  size           String?
+  description    String?                  @db.Text
+  descriptionRaw String?                  @db.Text
+  goodsType      String
+  label          String?
+  price          Int
+  status         String
+  visibility     Boolean
+  marketplaces   MarketplacesOnProducts[]
+  categories     CategoriesOnProducts[]
+  files          Files[]
+}
+
+model Files {
+  id            Int      @id @default(autoincrement())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  fileName      String
+  fileType      String
+  fileExtension String
+  fileSize      String
+  products      Products @relation(fields: [productId], references: [id])
+  productId     Int
+}
+
+model Articles {
+  id             Int      @id @default(autoincrement())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  title          String
+  slug           String
+  img            String
+  type           String
+  description    String?  @db.Text
+  descriptionRaw String?  @db.Text
+  status         String
+  visibility     Boolean
+}
+
+model Videos {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  title      String
+  slug       String
+  img        String
+  youtube    String
+  visibility Boolean
+}
+
+model Settings {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  page       String
+  slug       String
+  value1     String?  @db.Text
+  value2     String?  @db.Text
+  value3     String?  @db.Text
+  value4     String?  @db.Text
+  value5     String?  @db.Text
+  visibility Boolean
+}
